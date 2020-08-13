@@ -13,11 +13,16 @@ keys.addEventListener('click', e => {
         const displayedNum = display.textContent;
         const previousKeyType = calculator.dataset.previousKeyType;
 
+        //When a user hits a number key after an operator key
+        //To release the pressed state, 
+        //we remove the is-depressed class from all keys through a forEach loop
         Array.from(key.parentNode.children)
         .forEach(k => k.classList.remove('is-depressed'));
+        
 
         //when a user hits a number key
-        if(!action) { // if the calculator shows 0, we need to replace the display with clicked key
+        // if the calculator shows 0, we need to replace the display with clicked key
+        if(!action) { 
             if (displayedNum === '0' || 
             previousKeyType ==='operator' || 
             previousKeyType === 'calculate')
@@ -84,11 +89,12 @@ keys.addEventListener('click', e => {
             let firstValue = calculator.dataset.firstValue;
             const operator = calculator.dataset.operator;
             let secondValue = displayedNum;
+            //
 
             if (firstValue) {
                 if(previousKeyType === 'calculate') {
-                    firstValue = displayedNum;
-                    secondValue = calculator.dataset.modValue;
+                    firstValue = displayedNum; // the displayed num is stored as firstValue
+                    secondValue = calculator.dataset.modValue;// the second value is saved as a modvalue
                 }
             display.textContent = calculate(firstValue, operator, secondValue);
             //Now we have to create a calculate function with three parameters
